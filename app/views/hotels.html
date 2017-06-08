@@ -61,7 +61,10 @@
                                 <td>{{hotel.ville}}</td>
                                 <td>{{hotel.repas}}</td>
                                 <td>{{hotel.prix}}</td>
-                                <td></td>
+                                <td>
+                                    <a title="Modifier" class="btn btn-icon-only yellow" ng-click="edit(hotel)"><i class="fa fa-edit"></i></a>
+                                    <a title="Supprimer" class="btn btn-icon-only red" ng-click="delete(hotel)"><i class="fa fa-trash"></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

@@ -30,6 +30,14 @@
 			return region::execRequest($sql);
 		}
 
+		function deleteById($id = false){
+			if($id === false){
+				return returnResponse(true,"Missing parameter id ");
+			}
+			$sql = "DELETE FROM region_table WHERE id = ".pg_escape_string($id);
+			return region::execRequest($sql);
+		}
+
 		function save(){
 			if(!isset($this)){
 				return returnResponse(true,"Object not instancied. Cannot save it !");
@@ -46,7 +54,7 @@
 				$sql = "UPDATE region_table SET "
 						."nom='".pg_escape_string($this->nom)."', "
 						."description='".pg_escape_string($this->description)."', "
-						."customdata'".json_encode($this->customdata)."' "
+						."customdata='".json_encode($this->customdata)."' "
 						."WHERE id = ".pg_escape_string($this->id);
 			}
 			$result = dbExecRequest($sql);

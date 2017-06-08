@@ -34,6 +34,14 @@
 			return vehicule::execRequest($sql);
 		}
 
+		function deleteById($id = false){
+			if($id === false){
+				return returnResponse(true,"Missing parameter id ");
+			}
+			$sql = "DELETE FROM vehicule_table WHERE id = ".pg_escape_string($id);
+			return vehicule::execRequest($sql);
+		}
+
 		function save(){
 			if(!isset($this)){
 				return returnResponse(true,"Object not instancied. Cannot save it !");

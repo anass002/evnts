@@ -47,6 +47,29 @@ angular.module('MetronicApp').controller('VehiculeController', function($rootSco
     	$scope.data.vehicule = {};
 	}
 
+    $scope.delete = function(vehicule){
+        if(window.confirm("Etes vous sur de vouloir supprimer ?")){
+            $http.post('../serv/ws/vehicule.ws.php' , { action:'deleteVehicule', id : vehicule.id }).then(
+                function(res){
+                    if(res.data.error === true){
+                        alert('Unable to delete !');
+                        return false;
+                    }
+
+                    getVehicules();
+                },
+                function(err){
+                    console.log(err);
+                }
+            )
+        }
+    }
+    $scope.edit = function(vehicule){
+        $scope.data.showAllVehicules = false;
+        $scope.data.showNewVehicule = true;
+        $scope.data.vehicule = vehicule;
+    }
+
 
 
 

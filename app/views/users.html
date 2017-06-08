@@ -51,6 +51,7 @@
                                 <th> Sex </th>
                                 <th> Age </th>
                                 <th> Proffession </th>
+                                <th> Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,6 +75,10 @@
                                 </td>
                                 <td class="center">{{user.age}}</td>
                                 <td class="center">{{user.profession}}</td>
+                                <td class="center">
+                                    <a title="Modifier" class="btn btn-icon-only yellow" ng-click="edit(user)"><i class="fa fa-edit"></i></a>
+                                    <a title="Supprimer" class="btn btn-icon-only red" ng-click="delete(user)"><i class="fa fa-trash"></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>    

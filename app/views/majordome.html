@@ -57,9 +57,12 @@
                                 </td>
                                 <td>{{majordome.nom}}</td>
                                 <td>{{majordome.description}}</td>
-                                <td>{{majordome.disponibilité}}</td>
+                                <td>{{majordome.disponibilite}}</td>
                                 <td>{{majordome.prix}}</td>
-                                <td></td>
+                                <td>
+                                    <a title="Modifier" class="btn btn-icon-only yellow" ng-click="edit(majordome)"><i class="fa fa-edit"></i></a>
+                                    <a title="Supprimer" class="btn btn-icon-only red" ng-click="delete(majordome)"><i class="fa fa-trash"></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -87,7 +90,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Disponibilité : </label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" ng-model="data.majordome.disponibilité" placeholder="Disponibilité">
+                                            <input type="text" class="form-control" ng-model="data.majordome.disponibilite" placeholder="Disponibilité">
                                         </div>
                                     </div>
 

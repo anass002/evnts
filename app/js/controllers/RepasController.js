@@ -47,6 +47,29 @@ angular.module('MetronicApp').controller('RepasController', function($rootScope,
 		$scope.data.repas = {};
 	}
 
+	$scope.delete = function(repas){
+        if(window.confirm("Etes vous sur de vouloir supprimer ?")){
+            $http.post('../serv/ws/repas.ws.php' , { action:'deleteRepas', id : repas.id }).then(
+                function(res){
+                    if(res.data.error === true){
+                        alert('Unable to delete !');
+                        return false;
+                    }
+
+                    getRepas();
+                },
+                function(err){
+                    console.log(err);
+                }
+            )
+        }
+    }
+    $scope.edit = function(repas){
+        $scope.data.showRepasTable = false;
+		$scope.data.showRepasForm = true;
+		$scope.data.repas = repas;
+    }
+
 
 	function getRepas(){
 		$http.post('../serv/ws/repas.ws.php' , {action:'getAllRepas'}).then(

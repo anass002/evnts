@@ -44,6 +44,29 @@ angular.module('MetronicApp').controller('HotelsController', function($rootScope
     	$scope.data.hotel = {};
 	}
 
+    $scope.delete = function(hotel){
+        if(window.confirm("Etes vous sur de vouloir supprimer ?")){
+            $http.post('../serv/ws/hotel.ws.php' , { action:'deleteHotel', id : hotel.id }).then(
+                function(res){
+                    if(res.data.error === true){
+                        alert('Unable to delete !');
+                        return false;
+                    }
+
+                    getHotels();
+                },
+                function(err){
+                    console.log(err);
+                }
+            )
+        }
+    }
+    $scope.edit = function(hotel){
+        $scope.data.showHotelsTable = false;
+        $scope.data.showHotelForm = true;
+        $scope.data.hotel = hotel;
+    }
+
 
 
 

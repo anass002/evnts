@@ -36,6 +36,14 @@
 			return repas::execRequest($sql);
 		}
 
+		function deleteById($id = false){
+			if($id === false){
+				return returnResponse(true,"Missing parameter id ");
+			}
+			$sql = "DELETE FROM repas_table WHERE id = ".pg_escape_string($id);
+			return repas::execRequest($sql);
+		}
+
 		function save(){
 			if(!isset($this)){
 				return returnResponse(true,"Object not instancied. Cannot save it !");

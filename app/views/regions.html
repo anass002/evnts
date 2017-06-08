@@ -55,7 +55,10 @@
                                 </td>
                                 <td>{{region.nom}}</td>
                                 <td>{{region.description}}</td>
-                                <td></td>
+                                <td>
+                                    <a title="Modifier" class="btn btn-icon-only yellow" ng-click="edit(region)"><i class="fa fa-edit"></i></a>
+                                    <a title="Supprimer" class="btn btn-icon-only red" ng-click="delete(region)"><i class="fa fa-trash"></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>    

@@ -7,7 +7,7 @@
 		var $id;
 		var $nom;
 		var $description;
-		var $disponibilité;
+		var $disponibilite;
 		var $prix;
 		var $customdata;
 
@@ -15,7 +15,7 @@
 			$this->id = false;
 			$this->nom = '';
 			$this->description = ''; 
-			$this->disponibilité = '';
+			$this->disponibilite = '';
 			$this->prix = '';
 			$this->customdata = new stdClass(); 
 		}
@@ -33,6 +33,15 @@
 			$sql = "SELECT * FROM majordome_table";
 			return majordome::execRequest($sql);
 		}
+
+		function deleteById($id = false){
+			if($id === false){
+				return returnResponse(true,"Missing parameter id ");
+			}
+			$sql = "DELETE FROM majordome_table WHERE id = ".pg_escape_string($id);
+			return majordome::execRequest($sql);
+		}
+
 		function save(){
 			if(!isset($this)){
 				return returnResponse(true,"Object not instancied. Cannot save it !");
@@ -40,19 +49,19 @@
 
 			if($this->id === false){
 				$sql = "INSERT INTO majordome_table VALUES (DEFAULT, "
-						."'".pg_escape_string(nom)."', "
-						."'".pg_escape_string(description)."', "
-						."'".pg_escape_string(disponibilité)."', "
-						."'".pg_escape_string(prix)."', "
-						."'".json_encode(customdata)."' "
+						."'".pg_escape_string($this->nom)."', "
+						."'".pg_escape_string($this->description)."', "
+						."'".pg_escape_string($this->disponibilite)."', "
+						."'".pg_escape_string($this->prix)."', "
+						."'".json_encode($this->customdata)."' "
 						.") RETURNING id";
 			}else{
 				$sql = "UPDATE majordome_table SET "
-						."nom='".pg_escape_string(nom)."', "
-						."description='".pg_escape_string(description)."', "
-						."disponibilité='".pg_escape_string(disponibilité)."', "
-						."prix='".pg_escape_string(prix)."', "
-						."customdata='".json_encode(customdata)."' "
+						."nom='".pg_escape_string($this->nom)."', "
+						."description='".pg_escape_string($this->description)."', "
+						."disponibilité='".pg_escape_string($this->disponibilite)."', "
+						."prix='".pg_escape_string($this->prix)."', "
+						."customdata='".json_encode($this->customdata)."' "
 						."WHERE id = ".pg_escape_string($this->id);
 			}
 			$result = dbExecRequest($sql);
@@ -73,7 +82,7 @@
 				$majordome->id = trim($row['id']);
 				$majordome->nom = trim($row['nom']);
 				$majordome->description = trim($row['description']); 
-				$majordome->disponibilité = trim($row['disponibilité']);
+				$majordome->disponibilite = trim($row['disponibilité']);
 				$majordome->prix = trim($row['prix']);
 				$majordome->customdata = json_decode($row['customdata']); 
 				return $majordome;

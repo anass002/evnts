@@ -52,6 +52,29 @@ angular.module('MetronicApp').controller('UtilisateursController', function($roo
         $scope.data.showAllProfile = true;
     }
 
+    $scope.delete = function(profile){
+        if(window.confirm("Etes vous sur de vouloir supprimer ?")){
+            $http.post('../serv/ws/profile.ws.php' , { action:'deleteProfile', id : profile.id }).then(
+                function(res){
+                    if(res.data.error === true){
+                        alert('Unable to delete !');
+                        return false;
+                    }
+
+                    getProfiles();
+                },
+                function(err){
+                    console.log(err);
+                }
+            )
+        }
+    }
+    $scope.edit = function(profile){
+        $scope.data.showAllProfile = false;
+        $scope.data.AddNewProfile = true;
+        $scope.data.profile = profile;
+    }
+
     function getProfiles(){
     	$http.post('../serv/ws/users.ws.php' , {action:'getAllProfiles'}).then(
     		function(res){

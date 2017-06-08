@@ -59,7 +59,10 @@
                                 <td>{{surprise.description }}</td>
                                 <td>{{surprise.contenu}}</td>
                                 <td>{{surprise.prix}}</td>
-                                <td></td>
+                                <td>
+                                    <a title="Modifier" class="btn btn-icon-only yellow" ng-click="edit(surprise)"><i class="fa fa-edit"></i></a>
+                                    <a title="Supprimer" class="btn btn-icon-only red" ng-click="delete(surprise)"><i class="fa fa-trash"></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

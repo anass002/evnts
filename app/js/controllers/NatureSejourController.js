@@ -9,6 +9,8 @@ angular.module('MetronicApp').controller('NatureSejourController', function($roo
     $scope.data.showAllSejours = true;
 
 
+    getSejours();
+
 
     $scope.newNatureSejour = function(){
     	$scope.data.showAddNewSejour = true;
@@ -37,6 +39,29 @@ angular.module('MetronicApp').controller('NatureSejourController', function($roo
 	    $scope.data.showAllSejours = true;
 	    $scope.data.sejour = {};
 	}
+
+    $scope.delete = function(sejour){
+        if(window.confirm("Etes vous sur de vouloir supprimer ?")){
+            $http.post('../serv/ws/sejour.ws.php' , { action:'deleteSejour', id : sejour.id }).then(
+                function(res){
+                    if(res.data.error === true){
+                        alert('Unable to delete !');
+                        return false;
+                    }
+
+                    getSejours();
+                },
+                function(err){
+                    console.log(err);
+                }
+            )
+        }
+    }
+    $scope.edit = function(sejour){
+        $scope.data.showAddNewSejour = true;
+        $scope.data.showAllSejours = false;
+        $scope.data.sejour = sejour;
+    }
 
     function getSejours(){
     	$http.post('../serv/ws/sejour.ws.php', {action:'getAllSejours'}).then(

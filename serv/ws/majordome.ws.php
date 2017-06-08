@@ -29,7 +29,16 @@
 
 				echo json_encode($newMajordome->save());
 				return false;
-				break;	
+				break;
+			case 'deleteMajordome':
+				if(!isset($postdata->id)){
+					echo json_encode(returnResponse(true,"Missing id paramater"));
+					return false;
+				}
+
+				echo json_encode(majordome::deleteById($postdata->id));
+				return false;
+				break;		
 			default:
 				echo json_encode(returnResponse(true,"No Action Provided !"));
 				return false;

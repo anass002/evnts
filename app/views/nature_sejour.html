@@ -57,7 +57,10 @@
                                 <td>{{sejour.nom}}</td>
                                 <td>{{sejour.description}}</td>
                                 <td>{{sejour.prix}}</td>
-                                <td></td>
+                                <td>
+                                    <a title="Modifier" class="btn btn-icon-only yellow" ng-click="edit(sejour)"><i class="fa fa-edit"></i></a>
+                                    <a title="Supprimer" class="btn btn-icon-only red" ng-click="delete(sejour)"><i class="fa fa-trash"></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

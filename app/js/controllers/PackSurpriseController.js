@@ -45,6 +45,29 @@ angular.module('MetronicApp').controller('PackSurpriseController', function($roo
 		$scope.data.surprise = {}
 	}
 
+	$scope.delete = function(surprise){
+        if(window.confirm("Etes vous sur de vouloir supprimer ?")){
+            $http.post('../serv/ws/surprise.ws.php' , { action:'deleteSurprise', id : surprise.id }).then(
+                function(res){
+                    if(res.data.error === true){
+                        alert('Unable to delete !');
+                        return false;
+                    }
+
+                    getSurprise();
+                },
+                function(err){
+                    console.log(err);
+                }
+            )
+        }
+    }
+    $scope.edit = function(surprise){
+        $scope.data.showTablesurprise = false;
+		$scope.data.showSurpriseForm = true;
+		$scope.data.surprise = surprise;
+    }
+
 
 	function getSurprise(){
 		$http.post('../serv/ws/surprise.ws.php' , {action:'getAllSurprises'}).then(

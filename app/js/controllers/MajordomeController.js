@@ -43,16 +43,39 @@ angular.module('MetronicApp').controller('MajordomeController', function($rootSc
     	$scope.data.majordome = {};
 	}
 
+
+	$scope.delete = function(majordome){
+		if(window.confirm("Etes vous sur de vouloir supprimer ?")){
+			$http.post('../serv/ws/majordome.ws.php' , { action:'deleteMajordome', id : majordome.id }).then(
+				function(res){
+					if(res.data.error === true){
+						alert('Unable to delete !');
+						return false;
+					}
+
+					getMajordomes();
+				},
+				function(err){
+					console.log(err);
+				}
+			)
+		}
+	}
+	$scope.edit = function(majordome){
+		$scope.data.showTableMajordome = false;
+		$scope.data.showAddNewMajordome = true;
+    	$scope.data.majordome = majordome;
+	}
+
 	function getMajordomes(){
 		$http.post('../serv/ws/majordome.ws.php' , {action:'getAllMajordome'}).then(
 			function(res){
 				if(res.data.error === true){
 					alert("Unable to get All Majordomes !");
-					$scope.data.Majordomes = [];
+					$scope.data.majordomes = [];
 					return false;
 				}
-
-				$scope.data.Majordomes = res.data.data;
+				$scope.data.majordomes = res.data.data;
 			},
 			function(err){
 				console.log(err);

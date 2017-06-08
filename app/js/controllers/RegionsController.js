@@ -45,7 +45,28 @@ angular.module('MetronicApp').controller('RegionsController', function($rootScop
 		$scope.data.region = {};
 	}
 
+    $scope.delete = function(region){
+        if(window.confirm("Etes vous sur de vouloir supprimer ?")){
+            $http.post('../serv/ws/regions.ws.php' , { action:'deleteRegion', id : region.id }).then(
+                function(res){
+                    if(res.data.error === true){
+                        alert('Unable to delete !');
+                        return false;
+                    }
 
+                    getRegions();
+                },
+                function(err){
+                    console.log(err);
+                }
+            )
+        }
+    }
+    $scope.edit = function(region){
+        $scope.data.showAllRegions = false;
+        $scope.data.addNewRegion = true;
+        $scope.data.region = region;
+    }
 
 
 

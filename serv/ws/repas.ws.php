@@ -29,7 +29,16 @@
 
 				echo json_encode($newRepas->save());
 				return false;
-				break;	
+				break;
+			case 'deleteRepas':
+				if(!isset($postdata->id)){
+					echo json_encode(returnResponse(true,"Missing id paramater"));
+					return false;
+				}
+
+				echo json_encode(repas::deleteById($postdata->id));
+				return false;
+				break;				
 			default:
 				echo json_encode(returnResponse(true,"No Action Provided !"));
 				return false;
